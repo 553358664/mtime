@@ -1,26 +1,32 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import { Provider } from "react-redux"
+import {HashRouter as Router , Route  , Redirect , Switch} from "react-router-dom"
+import Home from "./components/home"
+import Buy from "./components/buy"
+import Mall from "./components/mall"
+import Find from "./components/find"
+import Footer from "./components/footer"
+import store from "./store"
+import "./common/css/iconfont/iconfont.css"
+import "./common/css/reset.css"
+import "./common/js/flexble"
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Provider store={store}>
+        <Router>
+          <div className="App">
+            <Switch>
+              <Route path="/home" Component={Home}/>
+              <Route path="/buy" Component={Buy}/>
+              <Route path="/mall" Component={Mall}/>
+              <Route path="/find" Component={Find}/>
+              <Redirect path="/" to="/home"/>
+            </Switch>
+            <Footer/>
+          </div>
+        </Router>
+      </Provider>
     );
   }
 }
